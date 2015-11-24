@@ -15,6 +15,7 @@ model{
     display:table;
     margin: 2em;
     margin-left: 3em;
+    margin-right: 3em;
     font-family:arial, helvetica, sans-serif;    
 }
 
@@ -126,6 +127,7 @@ topic:focus-within > title:before{
         )
       )
     ;
+    
 }
 
 
@@ -224,4 +226,90 @@ model:after{
     ))
 }
 
+/* webapp specific */
+@media oxygen AND (platform:"webapp") {
+    
+    
+model {
+    margin-left:4.5em;
+    margin-right:4.5em;
+}    
 
+topic > title:before {
+    content:"";
+}
+topic > title:before(2) {
+    width:4em;
+    display:block;
+    position:absolute;
+    left:-4em;
+    content:
+      oxy_button(showIcon, true, transparent, true,
+        action, oxy_action(
+          name, 'Decrease level',
+          description, 'Decrease the topic level', 
+          operation, 'ro.sync.ecss.extensions.commons.operations.XSLTOperation', 
+          icon, url('images/NodePromote16.png'),          
+          arg-script, '<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"><xsl:import href="resources/actions/levelMinus.xsl"/></xsl:stylesheet>'
+          arg-sourceLocation, '..',
+          arg-targetLocation, '..',
+          arg-action, 'Replace'
+        )
+      )
+      oxy_button(showIcon, true, transparent, true,
+        action, oxy_action(
+          name, 'Increase level',
+          description, 'Increase the topic level', 
+          operation, 'ro.sync.ecss.extensions.commons.operations.XSLTOperation', 
+          icon, url('images/NodeDemote16.png'),          
+          arg-script, '<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"><xsl:import href="resources/actions/levelPlus.xsl"/></xsl:stylesheet>'
+          arg-sourceLocation, '..',
+          arg-targetLocation, '..',
+          arg-action, 'Replace'
+        )
+      )
+    ;
+    
+}
+    
+    
+    
+topic:hover > filename:after(10) {
+    content:"";
+}    
+topic > filename:after(11) {
+    position:absolute;
+    top:-0.2em;
+    right:-5em;
+    display:block;
+    width:5em;
+    text-align:right;
+    
+    content:
+       oxy_button(showIcon, true, transparent, true,
+        action, oxy_action(
+          name, 'Add topic',
+          description, 'Add topic', 
+          operation, 'ro.sync.ecss.extensions.commons.operations.XSLTOperation', 
+          icon, url('images/add16.png'),          
+          arg-script, '<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"><xsl:import href="resources/actions/addTopic.xsl"/></xsl:stylesheet>'
+          arg-sourceLocation, '..',
+          arg-targetLocation, '..',
+          arg-action, 'After'
+        )
+       )
+       oxy_button(showIcon, true, transparent, true,
+        action, oxy_action(
+          name, 'Add topic',
+          description, 'Add topic', 
+          operation, 'ro.sync.ecss.extensions.commons.operations.XSLTOperation', 
+          icon, url('images/remove16.png'),          
+          arg-script, '<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"><xsl:import href="resources/actions/removeTopic.xsl"/></xsl:stylesheet>'
+          arg-sourceLocation, '..',
+          arg-targetLocation, '..',
+          arg-action, 'Replace'
+        )
+      )
+    ;
+}
+}
